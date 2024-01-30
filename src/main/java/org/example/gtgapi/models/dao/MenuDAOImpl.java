@@ -3,41 +3,42 @@ package org.example.gtgapi.models.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.example.gtgapi.models.entity.Bowl;
+import org.example.gtgapi.models.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class BowlDAOImpl implements BowlDAO {
+public class MenuDAOImpl implements MenuDAO {
 
     private final EntityManager entityManager;
 
     @Autowired
-    public BowlDAOImpl(EntityManager theEntityManager) {
+    public MenuDAOImpl(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
 
     @Override
     @Transactional
-    public void save(Bowl bowl) {
-        entityManager.persist(bowl);
+    public void save(Menu menu) {
+        entityManager.persist(menu);
     }
 
     @Override
-    public Bowl findById(long id) {
-        return entityManager.find(Bowl.class, id);
+    public Menu findById(long id) {
+        return entityManager.find(Menu.class, id);
     }
 
     @Override
-    public Bowl[] findAll() {
-        Query query = entityManager.createQuery("from Bowl");
-        return (Bowl[]) query.getResultList().toArray(Bowl[]::new);
+    public Menu[] findAll() {
+        Query query = entityManager.createQuery("from Menu");
+        return (Menu[]) query.getResultList().toArray(Menu[]::new);
     }
 
     @Override
     @Transactional
-    public void update(Bowl bowl) {
-        entityManager.merge(bowl);
+    public void update(Menu menu) {
+        entityManager.merge(menu);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class BowlDAOImpl implements BowlDAO {
     @Override
     @Transactional
     public void deleteAll() {
-        Query query = entityManager.createQuery("delete from Bowl");
+        Query query = entityManager.createQuery("delete from Menu");
         query.executeUpdate();
     }
 }
