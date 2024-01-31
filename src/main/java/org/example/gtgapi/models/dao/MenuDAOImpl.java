@@ -2,7 +2,6 @@ package org.example.gtgapi.models.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import org.example.gtgapi.models.entity.Bowl;
 import org.example.gtgapi.models.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,7 +43,8 @@ public class MenuDAOImpl implements MenuDAO {
     @Override
     @Transactional
     public void delete(long id) {
-        entityManager.remove(findById(id));
+        Menu menu = findById(id);
+        entityManager.remove(menu);
     }
 
     @Override
