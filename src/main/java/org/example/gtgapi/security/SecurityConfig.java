@@ -16,12 +16,12 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails john = User.builder()
+        UserDetails isaac = User.builder()
                 .username("isaac")
                 .password("{noop}test123")
                 .build();
 
-        UserDetails mary = User.builder()
+        UserDetails george = User.builder()
                 .username("george")
                 .password("{noop}test123")
                 .build();
@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .password("{noop}test123")
                 .build();
 
-        return new InMemoryUserDetailsManager(john, mary, david);
+        return new InMemoryUserDetailsManager(isaac, george, david);
     }
 
     @Bean
