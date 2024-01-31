@@ -1,12 +1,14 @@
 package org.example.gtgapi.controller;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.gtgapi.models.dao.MenuDAOImpl;
 import org.example.gtgapi.models.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MenuController {
@@ -56,9 +58,9 @@ public class MenuController {
 
     @DeleteMapping("/menu/delete/{id}")
     public String deleteMenu(@PathVariable Long id) {
-
         MenuService.delete(id);
+        Menu menuLibanes = new Menu();
+        MenuService.save(menuLibanes);
         return "redirect:/menus";
     }
-
 }

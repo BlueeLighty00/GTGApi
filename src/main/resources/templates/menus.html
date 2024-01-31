@@ -15,7 +15,7 @@
             if (id) {
                 fetch('/menu/delete/' + id, {
                     method: 'DELETE'
-                }).then(() => {
+                }   ).then(() => {
                     location.reload()
                 });
             } else {
@@ -58,7 +58,7 @@
                     <a th:href="@{'/menu/edit/' + ${menu.id}}" role="button" class="btn btn-primary">
                         <span>Editar</span>
                     </a>
-                    <button th:onclick="@{'deleteMenu('+${menu.id}+')'}" class="btn btn-outline-danger">
+                    <button th:onclick="@{'deleteMenu('+${menu.id}+')'}" role="button" class="btn btn-outline-danger">
                         Borrar
                     </button>
                 </div>
