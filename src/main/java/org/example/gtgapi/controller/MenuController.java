@@ -59,8 +59,6 @@ public class MenuController {
     @DeleteMapping("/menu/delete/{id}")
     public String deleteMenu(@PathVariable Long id) {
         MenuService.delete(id);
-        Menu menuLibanes = new Menu();
-        MenuService.save(menuLibanes);
         return "redirect:/menus";
     }
 }
