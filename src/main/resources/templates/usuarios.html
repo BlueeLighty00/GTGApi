@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GTG / USUARIOS</title>
+
+    <script>
+        function deleteUsuario(id) {
+            if (id) {
+                fetch('/usuario/delete/' + id, {
+                    method: 'DELETE'
+                }).then(() => {
+                    location.reload()
+                });
+            } else {
+                console.error('Invalid ID');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<header th:replace="fragments/header::header"></header>
+<a th:href="@{'/usuario/create'}" role="button" class="btn btn-primary">
+    <span>Añadir usuario</span>
+</a>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <th scope="row" th:text="${usuario.id}"></th>
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.apellidos}"></td>
+            <td th:text="${usuario.correo}"></td>
+            <td th:text="${usuario.telefono}"></td>
+            <td th:text="${usuario.direccion}"></td>
+            <td class="td-actions">
+                <div class="td-actions__wrapper">
+                    <a th:href="@{'/usuario/' + ${usuario.id}}" role="button" class="btn btn-primary">
+                        <span>Detalles</span>
+                    </a>
+                    <a th:href="@{'/usuario/edit/' + ${usuario.id}}" role="button" class="btn btn-primary">
+                        <span>Editar</span>
+                    </a>
+                    <button th:onclick="@{'deleteUsuario('+${usuario.id}+')'}" class="btn btn-outline-danger">Borrar</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GTG / USUARIO / DETALLES</title>
+</head>
+<body>
+
+<header th:replace="fragments/header::header"></header>
+
+<div class="container my-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex mb-4 justify-content-between align-items-center">
+                <h1>Detalles del usuario <span th:text="${usuario.username}"></span></h1>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 ps-3">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Nombre de Usuario</label>
+                        <input th:value="${usuario.nombre}" disabled id="userName" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Apellidos</label>
+                        <input th:value="${usuario.apellidos}" disabled id="fullName" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input th:value="${usuario.correo}" disabled id="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telf" class="form-label">Telefono</label>
+                        <input th:value="${usuario.telefono}" disabled id="telf" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pass" class="form-label">Contraseña</label>
+                        <input th:value="${usuario.contrasenya}" disabled id="pass" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dir" class="form-label">Dirección</label>
+                        <input th:value="${usuario.direccion}" disabled id="dir" class="form-control">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
