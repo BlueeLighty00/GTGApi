@@ -1,6 +1,7 @@
 package org.example.gtgapi.models.dao;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import org.example.gtgapi.models.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class MenuDAOImpl implements MenuDAO {
 
     private final EntityManager entityManager;
@@ -25,7 +27,11 @@ public class MenuDAOImpl implements MenuDAO {
 
     @Override
     public Menu findById(long id) {
-        return entityManager.find(Menu.class, id);
+        Menu menu = entityManager.find(Menu.class, id);
+        if (menu == null) {
+            throw new EntityNotFoundException("Menu with id " + id + " not found");
+        }
+        return menu;
     }
 
     @Override
