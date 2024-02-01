@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<header th:replace="fragments/header::header"></header>
+<header th:replace="~{fragments/header::header}"></header>
 
 <div class="container my-4">
     <div class="card">
@@ -43,10 +43,6 @@
                         <div class="mb-3">
                             <label for="telf" class="form-label">Telefono</label>
                             <input th:field="*{telefono}" type="text" class="form-control" id="telf">
-                        </div>
-                        <div class="mb-3">
-                            <label for="pass" class="form-label">Contraseña</label>
-                            <input th:field="*{contrasenya}" type="text" class="form-control" id="pass">
                         </div>
                         <div>
                             <label for="dir" class="form-label">Dirección</label>

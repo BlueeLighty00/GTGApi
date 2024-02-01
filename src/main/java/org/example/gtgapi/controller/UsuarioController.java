@@ -3,6 +3,7 @@ package org.example.gtgapi.controller;
 import org.example.gtgapi.models.dao.UsuarioDAOImpl;
 import org.example.gtgapi.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ public class UsuarioController {
 
     @Autowired
     UsuarioDAOImpl usuarioDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/usuarios")
     public String usuarios(Model model) {
@@ -41,6 +45,7 @@ public class UsuarioController {
 
     @PostMapping("/usuario/create")
     public String newUsuario(@ModelAttribute("usuario") Usuario usuario) {
+        usuario.setContrasenya(passwordEncoder.encode(usuario.getContrasenya()));
         usuarioDao.save(usuario);
         return "redirect:/usuarios";
     }

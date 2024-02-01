@@ -1,6 +1,7 @@
 package org.example.gtgapi.models.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -49,6 +50,7 @@ public class Usuario {
 
     @Basic
     @Column(name = "contrasenya")
+    @JsonIgnore
     private String contrasenya;
 
     @Basic
