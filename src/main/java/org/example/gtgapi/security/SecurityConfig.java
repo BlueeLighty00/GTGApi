@@ -38,7 +38,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(configurer ->
-                        configurer.requestMatchers(antMatcher(HttpMethod.POST, "/*")).permitAll()
+                        configurer
+                                .requestMatchers(antMatcher(HttpMethod.POST, "/*")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.POST, "/images/**")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.GET, "/images/**")).permitAll()
+                                .requestMatchers("/static/**").permitAll()
                                 .requestMatchers("/").permitAll()
                                 .anyRequest().authenticated()
                 ).csrf(AbstractHttpConfigurer::disable)
