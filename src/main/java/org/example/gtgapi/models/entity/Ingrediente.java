@@ -13,8 +13,7 @@ public class Ingrediente {
     public Ingrediente() {
     }
 
-    public Ingrediente(Long id, String nombre, Double precio, String tipo) {
-        this.id = id;
+    public Ingrediente(String nombre, Double precio, String tipo) {
         this.nombre = nombre;
         this.precio = precio;
         this.tipo = tipo;

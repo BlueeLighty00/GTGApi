@@ -14,8 +14,7 @@ public class Bowl {
     public Bowl(){
     }
 
-    public Bowl(Long id, String nombre, String descripcion, Double precio) {
-        this.id = id;
+    public Bowl(String nombre, String descripcion, Double precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
