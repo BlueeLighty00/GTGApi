@@ -5,67 +5,43 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
+@EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    JWTAuthorizationFilter jwtAuthorizationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails isaac = User.builder()
-                .username("isaac")
-                .password(passwordEncoder().encode("test123"))
-                .build();
-
-        UserDetails george = User.builder()
-                .username("george")
-                .password(passwordEncoder().encode("test123"))
-                .build();
-
-        UserDetails david = User.builder()
-                .username("david")
-                .password(passwordEncoder().encode("test123"))
-                .build();
-
-        return new InMemoryUserDetailsManager(isaac, george, david);
-    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(configurer ->
+        http.csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers(antMatcher(HttpMethod.POST, "/*")).permitAll()
-                                .requestMatchers(antMatcher(HttpMethod.POST, "/images/**")).permitAll()
-                                .requestMatchers(antMatcher(HttpMethod.GET, "/images/**")).permitAll()
-                                .requestMatchers("/static/**").permitAll()
-                                .requestMatchers("/").permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.POST, "/login")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.GET, "/login")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.POST, "/register")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.GET, "/register")).permitAll()
+                                .requestMatchers(antMatcher(HttpMethod.GET, "/app/*")).hasAuthority("USER")
                                 .anyRequest().authenticated()
-                ).csrf(AbstractHttpConfigurer::disable)
-                .formLogin(form ->
-                        form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/authenticateTheUser")
-                                .defaultSuccessUrl("/", true)
-                                .permitAll()
+
                 )
-                .logout(logout -> logout.permitAll()
-                );
+                .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();
     }
+
 }

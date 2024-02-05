@@ -6,6 +6,7 @@ public interface UsuarioDAO {
     void save(Usuario usuario);
 
     Usuario findById(long id);
+    Usuario findByUsername(String username);
 
     Usuario[] findAll();
 

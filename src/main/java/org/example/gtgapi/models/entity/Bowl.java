@@ -1,6 +1,7 @@
 package org.example.gtgapi.models.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -90,6 +91,7 @@ public class Bowl {
     }
 
     @ManyToMany(mappedBy = "bowlsAsociados", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Menu> menusAsociados = new LinkedHashSet<>();
 
     public Set<Menu> getMenusAsociados() {

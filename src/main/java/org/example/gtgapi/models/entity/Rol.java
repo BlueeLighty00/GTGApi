@@ -1,5 +1,6 @@
 package org.example.gtgapi.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -26,6 +27,7 @@ public class Rol {
     }
 
     @ManyToMany(mappedBy = "rolesAsociados", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Usuario> usuariosAsociados = new LinkedHashSet<>();
 
     public Set<Usuario> getUsuariosAsociados() {
@@ -56,6 +58,6 @@ public class Rol {
     @Override
     public String toString() {
 
-        return "Role{ id: " + id + ", name: " + name + "}";
+        return name;
     }
 }

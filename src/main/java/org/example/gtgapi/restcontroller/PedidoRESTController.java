@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/app/pedido")
 public class PedidoRESTController {
 
     @Autowired
@@ -20,7 +18,6 @@ public class PedidoRESTController {
 
     @GetMapping("/list")
     public Pedido[] pedidos() {
-        Pedido[] listPedidos = PedidoService.findAll();
         return PedidoService.findAll();
     }
 

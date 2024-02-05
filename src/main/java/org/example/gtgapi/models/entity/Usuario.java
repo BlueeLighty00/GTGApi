@@ -41,7 +41,7 @@ public class Usuario {
     private String apellidos;
 
     @Basic
-    @Column(name = "correo")
+    @Column(name = "correo", unique = true)
     private String correo;
 
     @Basic
@@ -58,7 +58,7 @@ public class Usuario {
     private String direccion;
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     public Long getId() {
