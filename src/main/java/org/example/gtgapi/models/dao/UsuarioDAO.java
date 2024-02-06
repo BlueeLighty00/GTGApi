@@ -8,6 +8,8 @@ public interface UsuarioDAO {
     Usuario findById(long id);
     Usuario findByUsername(String username);
 
+    Usuario findByEmail(String email);
+
     Usuario[] findAll();
 
     void update(Usuario usuario);

@@ -6,6 +6,7 @@ import org.example.gtgapi.models.RegistroUsuario;
 import org.example.gtgapi.models.dao.UsuarioDAOImpl;
 import org.example.gtgapi.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,6 @@ public class RegistroController {
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody @Valid RegistroUsuario nuevousuario) {
-        nuevousuario.setContrasenya(passwordEncoder.encode(nuevousuario.getContrasenya()));
         Usuario usuario = new Usuario();
         usuario.setNombre(nuevousuario.getNombre());
         usuario.setApellidos(nuevousuario.getApellidos());
@@ -34,8 +34,15 @@ public class RegistroController {
         usuario.setDireccion(nuevousuario.getDireccion());
         usuario.setUsername(nuevousuario.getUsername());
         usuario.setContrasenya(passwordEncoder.encode(nuevousuario.getContrasenya()));
-        usuarioDao.save(usuario);
 
+        if(usuarioDao.findByUsername(nuevousuario.getUsername()) != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con ese nombre de usuario");
+        }
+        if(usuarioDao.findByEmail(nuevousuario.getCorreo()) != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con ese correo");
+        }
+
+        usuarioDao.save(usuario);
         return ResponseEntity.ok("Usuario registrado exitosamente");
     }
 

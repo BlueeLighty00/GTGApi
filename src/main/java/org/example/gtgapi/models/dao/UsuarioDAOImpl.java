@@ -41,6 +41,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     @Override
+    public Usuario findByEmail(String email) {
+        try {
+            Query query = entityManager.createQuery("from Usuario where correo = :email");
+            query.setParameter("email", email);
+            return (Usuario) query.getSingleResult();
+        }catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
     public Usuario[] findAll() {
         Query query = entityManager.createQuery("from Usuario");
         return (Usuario[]) query.getResultList().toArray(Usuario[]::new);
