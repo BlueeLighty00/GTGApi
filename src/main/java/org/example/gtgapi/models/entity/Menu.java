@@ -15,10 +15,9 @@ public class Menu {
     public Menu(){
     }
 
-    public Menu(String nombre, String descripcion, Double precio) {
+    public Menu(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.precioMenu = precio;
     }
 
     @Id
@@ -33,10 +32,6 @@ public class Menu {
     @Basic
     @Column(name = "descripcion")
     private String descripcion;
-
-    @Basic
-    @Column(name = "precio_menu")
-    private Double precioMenu;
 
     public Long getId() {
         return id;
@@ -60,14 +55,6 @@ public class Menu {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Double getPrecioMenu() {
-        return precioMenu;
-    }
-
-    public void setPrecioMenu(Double precio) {
-        this.precioMenu = precio;
     }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade =  CascadeType.MERGE)

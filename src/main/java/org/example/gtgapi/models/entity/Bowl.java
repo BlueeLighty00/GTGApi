@@ -15,10 +15,9 @@ public class Bowl {
     public Bowl(){
     }
 
-    public Bowl(String nombre, String descripcion, Double precio) {
+    public Bowl(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.precio = precio;
     }
 
     @Id
@@ -33,10 +32,6 @@ public class Bowl {
     @Basic
     @Column(name = "descripcion")
     private String descripcion;
-
-    @Basic
-    @Column(name = "precio")
-    private Double precio;
 
     public Long getId() {
         return id;
@@ -60,14 +55,6 @@ public class Bowl {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
     }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade =  CascadeType.MERGE)
