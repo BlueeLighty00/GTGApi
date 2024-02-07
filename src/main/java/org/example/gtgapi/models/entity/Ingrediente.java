@@ -14,14 +14,15 @@ public class Ingrediente {
     public Ingrediente() {
     }
 
-    public Ingrediente(String nombre, Double precio, String tipo, Float kcal, Float protein, Float carbohidrate, Float fat) {
+    public Ingrediente(String nombre, Double precio, String tipo, Float kcal, Float proteina, Float carbohidrato, Float grasa, Float gramo) {
         this.nombre = nombre;
         this.precio = precio;
         this.tipo = tipo;
         this.kcal = kcal;
-        this.protein = protein;
-        this.carbohidrate = carbohidrate;
-        this.fat = fat;
+        this.proteina = proteina;
+        this.carbohidrato = carbohidrato;
+        this.grasa = grasa;
+        this.gramo = gramo;
     }
 
     @Id
@@ -46,16 +47,21 @@ public class Ingrediente {
     private Float kcal;
 
     @Basic
-    @Column(name = "protein")
-    private Float protein;
+    @Column(name = "proteina")
+    private Float proteina;
 
     @Basic
-    @Column(name = "carbohidrate")
-    private Float carbohidrate;
+    @Column(name = "carbohidrato")
+    private Float carbohidrato;
 
     @Basic
-    @Column(name = "fat")
-    private Float fat;
+    @Column(name = "grasa")
+    private Float grasa;
+
+    @Basic
+    @Column(name = "gramo")
+    private Float gramo;
+
 
     public Long getId() {
         return id;
@@ -109,27 +115,35 @@ public class Ingrediente {
         this.kcal = kcal;
     }
 
-    public Float getProtein() {
-        return protein;
+    public Float getProteina() {
+        return proteina;
     }
 
-    public void setProtein(Float protein) {
-        this.protein = protein;
+    public void setProteina(Float proteina) {
+        this.proteina = proteina;
     }
 
-    public Float getCarbohidrate() {
-        return carbohidrate;
+    public Float getCarbohidrato() {
+        return carbohidrato;
     }
 
-    public void setCarbohidrate(Float carbohidrate) {
-        this.carbohidrate = carbohidrate;
+    public void setCarbohidrato(Float carbohidrato) {
+        this.carbohidrato = carbohidrato;
     }
 
-    public Float getFat() {
-        return fat;
+    public Float getGrasa() {
+        return grasa;
     }
 
-    public void setFat(Float fat) {
-        this.fat = fat;
+    public void setGrasa(Float grasa) {
+        this.grasa = grasa;
+    }
+
+    public Float getGramo() {
+        return gramo;
+    }
+
+    public void setGramo(Float gramo) {
+        this.gramo = gramo;
     }
 }

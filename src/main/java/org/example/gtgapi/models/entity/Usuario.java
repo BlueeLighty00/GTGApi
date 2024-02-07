@@ -59,6 +59,7 @@ public class Usuario {
 
     @Basic
     @Column(name = "username", unique = true)
+    @JsonIgnore
     private String username;
 
     public Long getId() {
@@ -138,6 +139,7 @@ public class Usuario {
                     @JoinColumn(name = "rol_id", referencedColumnName = "id",
                             nullable = false, updatable = false)}
     )
+    @JsonIgnore
     private Set<Rol> rolesAsociados = new HashSet<>();
 
     public Set<Rol> getRolesAsociados() {

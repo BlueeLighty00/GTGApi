@@ -16,7 +16,14 @@ import java.util.stream.Collectors;
 public class JWTAuthtenticationConfig {
 
     public String getJWTToken(Usuario usuario) {
+
+        // Tiempo de vida del token: 1 semana
+        long tiempoDeVidaMillis = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
+        Date ahora = new Date();
+        Date expiracion = new Date(ahora.getTime() + tiempoDeVidaMillis);
+
         String secretKey = "AlvarJCGod@VolvedOsHechoDeMenosPorFavor";
+
         List<GrantedAuthority> grantedAuthorities = usuario.getRolesAsociados().stream()
                 .map(role -> new SimpleGrantedAuthority(role.toString()))
                 .collect(Collectors.toList());
@@ -30,6 +37,7 @@ public class JWTAuthtenticationConfig {
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(expiracion)
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
 
