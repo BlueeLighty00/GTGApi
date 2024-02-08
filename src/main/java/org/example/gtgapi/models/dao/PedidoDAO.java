@@ -11,6 +11,8 @@ public interface PedidoDAO {
 
     Pedido[] findAll();
 
+    Pedido[] findAllByUserId(long id);
+
     void update(Pedido rol);
 
     void delete(long id);

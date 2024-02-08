@@ -2,6 +2,7 @@ package org.example.gtgapi.restcontroller;
 
 
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.example.gtgapi.models.Jwt;
 import org.example.gtgapi.models.LoginUsuario;
 import org.example.gtgapi.models.dao.UsuarioDAOImpl;
@@ -33,6 +34,10 @@ public class UserController {
 	public ResponseEntity<?> login(@RequestBody @Valid LoginUsuario usuario) {
 
         Usuario usuarioDB = usuarioDao.findByUsername(usuario.getUsername());
+
+        if(usuarioDB == null) {
+            return ResponseEntity.ok("No existe el usuario");
+        }
 
         if(!passwordEncoder.matches(usuario.getContrasenya(), usuarioDB.getContrasenya())){
 

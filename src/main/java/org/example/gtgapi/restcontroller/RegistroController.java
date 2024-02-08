@@ -36,10 +36,10 @@ public class RegistroController {
         usuario.setContrasenya(passwordEncoder.encode(nuevousuario.getContrasenya()));
 
         if(usuarioDao.findByUsername(nuevousuario.getUsername()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con ese nombre de usuario");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe una cuenta con ese nombre de usuario");
         }
         if(usuarioDao.findByEmail(nuevousuario.getCorreo()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con ese correo");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe una cuenta con ese correo electronico");
         }
 
         usuarioDao.save(usuario);

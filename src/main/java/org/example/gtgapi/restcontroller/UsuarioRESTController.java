@@ -4,6 +4,8 @@ package org.example.gtgapi.restcontroller;
 import org.example.gtgapi.models.dao.UsuarioDAOImpl;
 import org.example.gtgapi.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +18,12 @@ public class UsuarioRESTController {
     @Autowired
     UsuarioDAOImpl UsuarioService;
 
-    @GetMapping("/list")
-    public Usuario[] usuarios() {
+    @GetMapping("/me")
+    public Usuario miUsuario() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return UsuarioService.findAll();
+        String username = authentication.getName();
+
+        return UsuarioService.findByUsername(username);
     }
-
-    @GetMapping("/list/{id}")
-    public Usuario pedidoID(@PathVariable Long id) {
-
-        return UsuarioService.findById(id);
-    }
-
 }

@@ -37,6 +37,15 @@ public class PedidoDAOImpl implements PedidoDAO {
     }
 
     @Override
+    public Pedido[] findAllByUserId(long id) {
+        Query q1 = entityManager.createQuery("from Pedido where usuario.id = :id");
+
+        q1.setParameter("id", id);
+
+        return (Pedido[]) q1.getResultList().toArray(Pedido[]::new);
+    }
+
+    @Override
     @Transactional
     public void update(Pedido pedido) {
 

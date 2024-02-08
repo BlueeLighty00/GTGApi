@@ -80,6 +80,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
+    @JsonIgnore
     private Usuario usuario;
 
     public Usuario getUsuario() {
