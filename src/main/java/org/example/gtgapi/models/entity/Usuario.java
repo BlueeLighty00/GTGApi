@@ -59,7 +59,6 @@ public class Usuario {
 
     @Basic
     @Column(name = "username", unique = true)
-    @JsonIgnore
     private String username;
 
     public Long getId() {

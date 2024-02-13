@@ -18,7 +18,7 @@ public class JWTAuthtenticationConfig {
     public String getJWTToken(Usuario usuario) {
 
         // Tiempo de vida del token: 1 semana
-        long tiempoDeVidaMillis = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
+        long tiempoDeVidaMillis = 365 * 24 * 60 * 60 * 1000;  //365 días en milisegundos
         Date ahora = new Date();
         Date expiracion = new Date(ahora.getTime() + tiempoDeVidaMillis);
 
